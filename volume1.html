@@ -8,25 +8,18 @@
 </head>
 <body>
     <div class="manga-page">
-        <h1>Ninja Slayer Volume 1</h1>
+        <h1 id="volume-title"></h1> <!-- Set the id for h1 element -->
         <div id="manga-images"></div>
     </div>
     
     <script>
         var folderName = 'volume-1'; // Set the folder name here
+        var numberOfImages = 200; // Manually set the number of images
 
         var mangaContainer = document.getElementById('manga-images');
-        
-        // Function to get the number of images in the folder
-        function getNumberOfImages(folder) {
-            var request = new XMLHttpRequest();
-            request.open('GET', folder, false);
-            request.send(null);
-            var files = request.responseText.split('\n');
-            return files.length - 1; // Subtract 1 for the last empty line
-        }
 
-        var numberOfImages = getNumberOfImages(folderName);
+        // Set the text content of the h1 element based on folderName
+        document.getElementById('volume-title').textContent = 'Ninja Slayer ' + folderName;
 
         for (var i = 0; i < numberOfImages; i++) {
             var img = document.createElement('img');
