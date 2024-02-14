@@ -4,14 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja Slayer</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
 </head>
 <body>
     <div class="manga-page">
         <h1>Ninja Slayer Volume 1</h1>
-        <img src="volume-1/image_0.jpg" alt="Page 1">
-        <img src="volume-1/image_1.jpg" alt="Page 2">
-        <!-- Add more images as needed -->
+        <div id="manga-images"></div>
     </div>
+    
+    <script>
+        // Get the container element where images will be appended
+        var mangaContainer = document.getElementById('manga-images');
+        
+        // Loop to include images dynamically
+        for (var i = 0; i <= 200; i++) {
+            // Create image element
+            var img = document.createElement('img');
+            // Set image source and alt attributes
+            img.src = 'volume-1/image_' + i + '.jpg';
+            img.alt = 'Page ' + (i + 1);
+            // Append the image to the container
+            mangaContainer.appendChild(img);
+        }
+    </script>
 </body>
 </html>
