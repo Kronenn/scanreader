@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="preload" href="..\pagedreader.js" as="script">
+	<title>30</title>
+</head>
+<body onload="loadJSON()">
+<script>data={"nextchapter": "../31/index.html", "previouschapter": "#", "pages": [{"page": "image_0.jpg"}, {"page": "image_1.jpg"}, {"page": "image_10.jpg"}, {"page": "image_11.jpg"}, {"page": "image_12.jpg"}, {"page": "image_13.jpg"}, {"page": "image_14.jpg"}, {"page": "image_15.jpg"}, {"page": "image_16.jpg"}, {"page": "image_17.jpg"}, {"page": "image_18.jpg"}, {"page": "image_19.jpg"}, {"page": "image_2.jpg"}, {"page": "image_20.jpg"}, {"page": "image_21.jpg"}, {"page": "image_22.jpg"}, {"page": "image_23.jpg"}, {"page": "image_24.jpg"}, {"page": "image_25.jpg"}, {"page": "image_26.jpg"}, {"page": "image_27.jpg"}, {"page": "image_28.jpg"}, {"page": "image_29.jpg"}, {"page": "image_3.jpg"}, {"page": "image_30.jpg"}, {"page": "image_31.jpg"}, {"page": "image_32.jpg"}, {"page": "image_33.jpg"}, {"page": "image_34.jpg"}, {"page": "image_35.jpg"}, {"page": "image_36.jpg"}, {"page": "image_37.jpg"}, {"page": "image_38.jpg"}, {"page": "image_39.jpg"}, {"page": "image_4.jpg"}, {"page": "image_40.jpg"}, {"page": "image_41.jpg"}, {"page": "image_42.jpg"}, {"page": "image_43.jpg"}, {"page": "image_44.jpg"}, {"page": "image_45.jpg"}, {"page": "image_5.jpg"}, {"page": "image_6.jpg"}, {"page": "image_7.jpg"}, {"page": "image_8.jpg"}, {"page": "image_9.jpg"}]}</script>
+<script type="text/javascript" src="..\pagedreader.js"></script>
+
+<img id="mainimage" href="#" style="width:100%"src="image_0.jpg" onclick="nextPage()" loadeddata="scrollTop()" $HIDDEN$></img>
+<div id = "pagination" style="position: relative">
+	<button style="float:left;width:10%;height:3em"type="button" onclick="window.location='#'">&lt;&lt;</button>
+	<button style="float:left;width:10%;height:3em"type="button" onclick="previousPage()">&lt;</button>
+	<span style="margin:auto; position:absolute;left: 30%;width: 40%;text-align: center;"> 
+		<input type="number" name="pageField" id="pageField" style="text-align:left;width: 4em" onchange="setpage(value-1)" value="1">
+		/ 
+		<span id="total"> </span>
+	</span>
+	<span style="margin:auto; position:absolute;left: 20%;width: 60%;text-align: center;top: 1em;word-wrap: break-word;">
+		<a href = "../index.html">30</a>
+	</span>
+	<button style="float:right;width:10%;height:3em" type="button" onclick="window.location='../31/index.html'">&gt;&gt;</button>
+	<button style="float:right;width:10%;height:3em" type="button" onclick="nextPage()">&gt;</button>
+</div>
+</body>
+</html>
