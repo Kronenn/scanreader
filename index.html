@@ -25,7 +25,7 @@
             mangaContainer.innerHTML = ''; // Clear any existing images
 
             // Set the text content of the h1 element based on folderName
-            document.getElementById('volume-title').textContent = 'Ninja Slayer ' + folderName;
+            document.getElementById('volume-title').textContent = 'Ninja Slayer ' + folderName.replace(/-/g, ' ');
 
             var numberOfImages = 0;
 
