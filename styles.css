@@ -17,6 +17,10 @@ header {
     padding: 20px 0;
 }
 
+nav {
+    padding-left: 20px; /* Add padding to the left */
+}
+
 nav ul {
     list-style-type: none;
     padding: 0;
