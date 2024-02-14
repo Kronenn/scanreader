@@ -33,21 +33,27 @@
     </div>
 
     <script>
-        var loadingImages = false; // Flag to track if images are currently loading
+        var currentVolume = null; // Track the currently loading volume
+        var currentImages = []; // Track the images being loaded
 
         function loadVolume(folderName) {
-            if (loadingImages) {
-                console.log('Images are currently loading. Please wait until the process is complete.');
-                return; // If images are currently loading, prevent starting a new load process
+            if (currentVolume !== null) {
+                console.log('Aborting current volume loading.');
+                // Abort the loading of current images
+                for (var i = 0; i < currentImages.length; i++) {
+                    currentImages[i].onload = null;
+                    currentImages[i].onerror = null;
+                }
             }
-
+            
             var mangaContainer = document.getElementById('manga-images');
             mangaContainer.innerHTML = ''; // Clear any existing images
-
+            
             var volumeTitle = folderName.replace(/-/g, ' ').toUpperCase();
             document.getElementById('volume-title').textContent = volumeTitle; // Display volume title
-
+            
             var numberOfImages = 0;
+            currentImages = []; // Reset the array for new images
 
             function loadImage(i) {
                 var img = new Image();
@@ -55,17 +61,17 @@
                     img.alt = 'Page ' + (i + 1);
                     mangaContainer.appendChild(img);
                     numberOfImages++;
-                    loadImage(i + 1);
+                    loadImage(i + 1); // Continue loading next image
                 };
                 img.onerror = function() {
-                    // No more images to load, stop the process
+                    // Error loading image, stop the process
                     console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
-                    loadingImages = false; // Reset the flag when loading is complete
                 };
                 img.src = folderName + '/image_' + i + '.jpg';
+                currentImages.push(img); // Track the current image
             }
 
-            loadingImages = true; // Set the flag to indicate that image loading has started
+            currentVolume = folderName; // Update the currently loading volume
             loadImage(0); // Start loading images
         }
     </script>
