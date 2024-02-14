@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="manga-page">
-        <h1 id="volume-title"></h1> <!-- Set the id for h1 element -->
+        <h1 id="volume-title"></h1> 
         <div id="manga-images"></div>
     </div>
     
@@ -21,7 +21,7 @@
         // Set the text content of the h1 element based on folderName
         document.getElementById('volume-title').textContent = 'Ninja Slayer ' + folderName;
 
-        for (var i = 0; i < numberOfImages; i++) {
+        for (var i = 0; i <= numberOfImages; i++) {
             var img = document.createElement('img');
             img.src = folderName + '/image_' + i + '.jpg';
             img.alt = 'Page ' + (i + 1);
