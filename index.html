@@ -7,16 +7,23 @@
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
-    <h1>Ninja Slayer</h1>
-    <ul>
-        <li><a href="#" onclick="loadVolume('volume-1')">Volume 1</a></li>
-        <li><a href="#" onclick="loadVolume('volume-2')">Volume 2</a></li>
-        <li><a href="#" onclick="loadVolume('volume-3')">Volume 3</a></li>
-        <!-- Add more volumes as needed -->
-    </ul>
-    <div class="manga-page">
-        <h1 id="volume-title"></h1> 
-        <div id="manga-images"></div>
+    <header>
+        <h1>Ninja Slayer</h1>
+        <nav>
+            <ul class="volume-list">
+                <li><a href="#" onclick="loadVolume('volume-1')">Volume 1</a></li>
+                <li><a href="#" onclick="loadVolume('volume-2')">Volume 2</a></li>
+                <li><a href="#" onclick="loadVolume('volume-3')">Volume 3</a></li>
+                <!-- Add more volumes as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="manga-page">
+            <h2 id="volume-title"></h2> 
+            <div id="manga-images"></div>
+        </div>
     </div>
 
     <script>
@@ -24,8 +31,8 @@
             var mangaContainer = document.getElementById('manga-images');
             mangaContainer.innerHTML = ''; // Clear any existing images
 
-            // Set the text content of the h1 element based on folderName
-            document.getElementById('volume-title').textContent = 'Ninja Slayer ' + folderName.replace(/-/g, ' ');
+            // Set the text content of the h2 element based on folderName
+            document.getElementById('volume-title').textContent = folderName.replace(/-/g, ' ');
 
             var numberOfImages = 0;
 
