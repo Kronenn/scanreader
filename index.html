@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja Slayer</title>
     <link rel="stylesheet" href="styles.css"> 
-    <style>
-        #progress-bar {
-            display: none; /* Hide the progress bar by default */
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -33,7 +28,6 @@
     <div class="content">
         <div class="manga-page">
             <h2 id="volume-title"></h2> 
-            <progress id="progress-bar" value="0" max="100"></progress>
             <div id="manga-images"></div>
         </div>
     </div>
@@ -61,21 +55,17 @@
                     img.alt = 'Page ' + (i + 1);
                     mangaContainer.appendChild(img);
                     numberOfImages++;
-                    var progress = (i + 1) * 100 / numberOfImages; // Calculate progress
-                    document.getElementById('progress-bar').value = progress; // Update progress bar
                     loadImage(i + 1);
                 };
                 img.onerror = function() {
                     // No more images to load, stop the process
                     console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
                     loadingImages = false; // Reset the flag when loading is complete
-                    document.getElementById('progress-bar').style.display = 'none'; // Hide the progress bar
                 };
                 img.src = folderName + '/image_' + i + '.jpg';
             }
 
             loadingImages = true; // Set the flag to indicate that image loading has started
-            document.getElementById('progress-bar').style.display = 'block'; // Show the progress bar
             loadImage(0); // Start loading images
         }
     </script>
