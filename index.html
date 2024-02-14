@@ -1,17 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja Slayer</title>
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
     <h1>Ninja Slayer</h1>
     <ul>
-        <li><a href="volume1.html">Volume 1</a></li>
-        <li><a href="chapter2.html">Volume 2</a></li>
-        <li><a href="chapter3.html">Volume 3</a></li>
-        <!-- Add more chapters as needed -->
+        <li><a href="#" onclick="loadVolume('volume-1')">Volume 1</a></li>
+        <li><a href="#" onclick="loadVolume('volume-2')">Volume 2</a></li>
+        <li><a href="#" onclick="loadVolume('volume-3')">Volume 3</a></li>
+        <!-- Add more volumes as needed -->
     </ul>
+    <div class="manga-page">
+        <h1 id="volume-title"></h1> 
+        <div id="manga-images"></div>
+    </div>
+
+    <script>
+        function loadVolume(folderName) {
+            var mangaContainer = document.getElementById('manga-images');
+            mangaContainer.innerHTML = ''; // Clear any existing images
+
+            // Set the text content of the h1 element based on folderName
+            document.getElementById('volume-title').textContent = 'Ninja Slayer ' + folderName;
+
+            var numberOfImages = 0;
+
+            function loadImage(i) {
+                var img = new Image();
+                img.onload = function() {
+                    img.alt = 'Page ' + (i + 1);
+                    mangaContainer.appendChild(img);
+                    numberOfImages++;
+                    loadImage(i + 1);
+                };
+                img.onerror = function() {
+                    // No more images to load, stop the process
+                    console.log('Total number of images loaded for ' + folderName + ':', numberOfImages);
+                };
+                img.src = folderName + '/image_' + i + '.jpg';
+            }
+
+            // Start loading images
+            loadImage(0);
+        }
+    </script>
 </body>
 </html>
