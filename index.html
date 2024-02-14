@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja Slayer</title>
     <link rel="stylesheet" href="styles.css"> 
+    <style>
+        /* CSS for the loading indicator */
+        .loading-indicator {
+            text-align: center;
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite; /* Spin animation */
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -29,6 +53,10 @@
         <div class="manga-page">
             <h2 id="volume-title"></h2> 
             <div id="manga-images"></div>
+            <div class="loading-indicator" id="loading-indicator">
+                <div class="loading-spinner"></div>
+                <p>Loading...</p>
+            </div>
         </div>
     </div>
 
@@ -49,6 +77,9 @@
 
             var numberOfImages = 0;
 
+            var loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.style.display = 'block'; // Show the loading indicator
+
             function loadImage(i) {
                 var img = new Image();
                 img.onload = function() {
@@ -61,6 +92,7 @@
                     // No more images to load, stop the process
                     console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
                     loadingImages = false; // Reset the flag when loading is complete
+                    loadingIndicator.style.display = 'none'; // Hide the loading indicator
                 };
                 img.src = folderName + '/image_' + i + '.jpg';
             }
