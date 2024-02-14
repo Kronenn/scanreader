@@ -18,7 +18,7 @@
                 <li><a href="#" onclick="loadVolume('volume-5')">Volume 5</a></li>
                 <li><a href="#" onclick="loadVolume('volume-6')">Volume 6</a></li>
                 <li><a href="#" onclick="loadVolume('volume-7')">Volume 7</a></li>
-                <li><a href="#" onclick="loadVolume('30')">Chapitre 30</a></li>
+                <li><a href="#" onclick="loadVolume('chapter-30')">Chapter 30</a></li>
                 <!-- Add more volumes as needed -->
             </ul>
         </nav>
@@ -32,12 +32,19 @@
     </div>
 
     <script>
+        var loadingImages = false; // Flag to track if images are currently loading
+
         function loadVolume(folderName) {
+            if (loadingImages) {
+                console.log('Images are currently loading. Please wait until the process is complete.');
+                return; // If images are currently loading, prevent starting a new load process
+            }
+
             var mangaContainer = document.getElementById('manga-images');
             mangaContainer.innerHTML = ''; // Clear any existing images
 
-            // Set the text content of the h2 element based on folderName
-            document.getElementById('volume-title').textContent = folderName.replace(/-/g, ' ');
+            var volumeTitle = folderName.replace(/-/g, ' ').toUpperCase();
+            document.getElementById('volume-title').textContent = volumeTitle; // Display volume title
 
             var numberOfImages = 0;
 
@@ -51,13 +58,14 @@
                 };
                 img.onerror = function() {
                     // No more images to load, stop the process
-                    console.log('Total number of images loaded for ' + folderName + ':', numberOfImages);
+                    console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
+                    loadingImages = false; // Reset the flag when loading is complete
                 };
                 img.src = folderName + '/image_' + i + '.jpg';
             }
 
-            // Start loading images
-            loadImage(0);
+            loadingImages = true; // Set the flag to indicate that image loading has started
+            loadImage(0); // Start loading images
         }
     </script>
 </body>
