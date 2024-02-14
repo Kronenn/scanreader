@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja Slayer</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
     <div class="manga-page">
@@ -13,17 +13,25 @@
     </div>
     
     <script>
-        // Get the container element where images will be appended
+        var folderName = 'volume-1'; // Set the folder name here
+
         var mangaContainer = document.getElementById('manga-images');
         
-        // Loop to include images dynamically
-        for (var i = 0; i <= 200; i++) {
-            // Create image element
+        // Function to get the number of images in the folder
+        function getNumberOfImages(folder) {
+            var request = new XMLHttpRequest();
+            request.open('GET', folder, false);
+            request.send(null);
+            var files = request.responseText.split('\n');
+            return files.length - 1; // Subtract 1 for the last empty line
+        }
+
+        var numberOfImages = getNumberOfImages(folderName);
+
+        for (var i = 0; i < numberOfImages; i++) {
             var img = document.createElement('img');
-            // Set image source and alt attributes
-            img.src = 'volume-1/image_' + i + '.jpg';
+            img.src = folderName + '/image_' + i + '.jpg';
             img.alt = 'Page ' + (i + 1);
-            // Append the image to the container
             mangaContainer.appendChild(img);
         }
     </script>
