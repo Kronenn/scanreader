@@ -3,76 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ninja Slayer</title>
+    <title>Bonkers Scan</title>
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
     <header>
-        <h1>Ninja Slayer</h1>
-        <nav>
-            <ul class="volume-list">
-                <li><a href="#" onclick="loadVolume('volume-1')">Volume 1</a></li>
-                <li><a href="#" onclick="loadVolume('volume-2')">Volume 2</a></li>
-                <li><a href="#" onclick="loadVolume('volume-3')">Volume 3</a></li>
-                <li><a href="#" onclick="loadVolume('volume-4')">Volume 4</a></li>
-                <li><a href="#" onclick="loadVolume('volume-5')">Volume 5</a></li>
-                <li><a href="#" onclick="loadVolume('volume-6')">Volume 6</a></li>
-                <li><a href="#" onclick="loadVolume('volume-7')">Volume 7</a></li>
-                <li><a href="#" onclick="loadVolume('30')">Chapitre 30</a></li>
-                <li><a href="#" onclick="loadVolume('31')">Chapitre 31</a></li>
-                <!-- Add more volumes as needed -->
-            </ul>
-        </nav>
+        <h1>Bonker Scan</h1>
     </header>
 
-    <div class="content">
-        <div class="manga-page">
-            <h2 id="volume-title"></h2> 
-            <div id="manga-images"></div>
+    <div class="container">
+        <div class="manga" onclick="navigateTo('ninja-slayer')">
+            <img src="ninja-slayer/cover.jpg" alt="Ninja Slayer">
+            <div class="manga-title">Ninja Slayer</div>
         </div>
+        <div class="manga" onclick="navigateTo('ninja-slayer')">
+            <img src="ninja-slayer/cover.jpg" alt="Ninja Slayer">
+            <div class="manga-title">Ninja Slayer</div>
+        </div>
+        <!-- Add more manga series as needed -->
     </div>
 
     <script>
-        var currentVolume = null; // Track the currently loading volume
-        var currentImages = []; // Track the images being loaded
-
-        function loadVolume(folderName) {
-            if (currentVolume !== null) {
-                console.log('Aborting current volume loading.');
-                // Abort the loading of current images
-                for (var i = 0; i < currentImages.length; i++) {
-                    currentImages[i].onload = null;
-                    currentImages[i].onerror = null;
-                }
-            }
-            
-            var mangaContainer = document.getElementById('manga-images');
-            mangaContainer.innerHTML = ''; // Clear any existing images
-            
-            var volumeTitle = folderName.replace(/-/g, ' ').toUpperCase();
-            document.getElementById('volume-title').textContent = volumeTitle; // Display volume title
-            
-            var numberOfImages = 0;
-            currentImages = []; // Reset the array for new images
-
-            function loadImage(i) {
-                var img = new Image();
-                img.onload = function() {
-                    img.alt = 'Page ' + (i + 1);
-                    mangaContainer.appendChild(img);
-                    numberOfImages++;
-                    loadImage(i + 1); // Continue loading next image
-                };
-                img.onerror = function() {
-                    // Error loading image, stop the process
-                    console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
-                };
-                img.src = folderName + '/image_' + i + '.jpg';
-                currentImages.push(img); // Track the current image
-            }
-
-            currentVolume = folderName; // Update the currently loading volume
-            loadImage(0); // Start loading images
+        function navigateTo(manga) {
+            window.location.href = manga+"/reader.html";
         }
     </script>
 </body>

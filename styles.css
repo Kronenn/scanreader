@@ -1,24 +1,40 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #222; /* Set dark background color */
-    color: #ddd; /* Set default text color */
+    background-color: #222; /* Dark background color */
+    color: #ddd; /* Default text color */
 }
 
 h1 {
-    text-align: center;
-    margin-top: 20px;
-    color: #ddd; /* Set heading text color */
-}
-
-header {
-    background-color: #333; /* Darker background color for header */
-    padding: 20px 0;
+    display: inline-block;
+    margin-top: 10px; /* Reduce top margin */
+    margin-bottom: 0;
+    font-size: 20px;
+    color: #ddd;
 }
 
 nav {
-    padding-left: 20px; /* Add padding to the left */
+    display: inline-block; /* Display as inline-block */
+    vertical-align: middle; /* Align vertically in the middle */
+    margin-left: 20px; /* Add margin between h1 and nav */
+}
+
+header {
+    background-color: #333; /* Darker background color for the header */
+    padding: 10px 0; /* Reduced padding */
+    text-align: center;
+    position: fixed; /* Fixed position */
+    top: 0; /* Position at the top of the viewport */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's on top of other content */
+}
+
+
+select {
+    padding: 8px; /* Reduce padding */
+    font-size: 14px; /* Decrease font size */
+    border-radius: 5px;
 }
 
 nav ul {
@@ -33,17 +49,18 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #ddd; /* Set text color for navigation links */
+    color: #ddd; /* Définir une couleur de texte pour les liens de navigation */
 }
 
 .manga-page {
     text-align: center;
-    background-color: #333; /* Dark background color for manga content */
-    border-radius: 10px; /* Add border radius */
-    margin-top: 20px; /* Add some space at the top */
+    background-color: #333; /* Dark background color for the manga content */
+    border-radius: 10px; /* Add rounded corners */
+    margin-top: 100px; /* Add top margin to move content below the header */
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle box shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
+
 
 .manga-page img {
     max-width: 100%;
@@ -52,8 +69,39 @@ nav ul li a {
     margin: 0 auto;
     padding: 0;
 }
-#progress-bar {
-    display: none; /* Hide the progress bar by default */
-    width: 10%; /* Set the width of the progress bar */
-    margin: 0 auto; /* Center the progress bar horizontally */
+
+.container {
+    max-width: 1200px;
+    margin: 70px auto 20px; /* Add top margin to create space below the fixed header */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
+.manga {
+    margin: 10px; /* Reduce margin */
+    width: 200px; /* Set a fixed width for each tile */
+    height: auto; /* Let the height adjust automatically based on content */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.manga:hover {
+    transform: translateY(-5px);
+}
+.manga img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.manga-title {
+    background-color: #9c9c9c;
+    color: #000000;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
