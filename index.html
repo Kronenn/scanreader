@@ -11,23 +11,59 @@
         <h1>Bonkers Scan</h1>
     </header>
 
-    <div class="container">
-        <div class="manga" onclick="navigateTo('ninja-slayer')">
-            <img src="ninja-slayer/cover.jpg" alt="Ninja Slayer">
-            <div class="manga-title">Ninja Slayer</div>
-        </div>
-        <div class="manga" onclick="navigateTo('ninja-slayer')">
-            <img src="ninja-slayer/cover.jpg" alt="Ninja Slayer">
-            <div class="manga-title">Ninja Slayer</div>
-        </div>
-        <!-- Add more manga series as needed -->
+    <div id="container" class="container">
     </div>
 
     <script>
-        function navigateTo(manga) {
-            localStorage.setItem('data1', manga);
-            window.location.href = manga+"/reader.html";
+
+        var mangaList = [
+            ['ninja-slayer', [
+                '1-4', '5-8', '9-12', '13-17', '18-21', '22-25', '26-29', '31', '32', '33',
+                '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45',
+                '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57',
+                '58', '59'
+            ]],
+            ['the-boxer', ['34', '35']],
+            // Add more manga series as needed
+        ];
+
+        // Function to generate manga containers dynamically
+        function generateMangaContainers() {
+            var container = document.getElementById('container');
+
+            // Loop through the manga list and create containers
+            mangaList.forEach(function(mangaData) {
+                var mangaName = mangaData[0];
+                var mangaFolders = mangaData[1];
+
+                var mangaContainer = document.createElement('div');
+                mangaContainer.classList.add('manga');
+                mangaContainer.onclick = function() {
+                    navigateTo(mangaName, mangaFolders); // Pass the list of folders to navigateTo function
+                };
+
+                var img = document.createElement('img');
+                img.src = mangaName + '/cover.jpg';
+                mangaContainer.appendChild(img);
+
+                var title = document.createElement('div');
+                title.classList.add('manga-title');
+                title.textContent = mangaName.replace('-', ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                mangaContainer.appendChild(title);
+
+                container.appendChild(mangaContainer);
+            });
         }
+
+        // Call the function to generate manga containers when the page loads
+        generateMangaContainers();
+
+        // Function to navigate to the selected manga
+        function navigateTo(manga, folders) {
+        localStorage.setItem('data1', manga);
+        localStorage.setItem('folders', JSON.stringify(folders)); // Store the list of folders as a string
+        window.location.href = manga + "/reader.html";
+    }
     </script>
 </body>
 </html>
