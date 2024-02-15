@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonkers Scan</title>
+    <link rel="stylesheet" href="../styles.css"> 
+</head>
+<body>
+    <header>
+        <h1 id="manga-title-reader"></h1>
+        <nav>
+            <select id="chapter-select" onchange="loadVolume(this.value)">
+                <option value="" disabled selected>Sélectionner un chapitre</option>
+            </select>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="manga-page">
+            <div id="manga-images"></div>
+        </div>
+    </div>
+
+    <script>
+
+        // Retrieve manga title and folders data from localStorage
+        var mangaTitle = localStorage.getItem('data1').replace('-', ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        var mangaFoldersData = localStorage.getItem('folders');
+        var chapterFolders = JSON.parse(mangaFoldersData);
+
+        // Set manga title
+        document.getElementById('manga-title-reader').textContent = mangaTitle;
+
+        var currentVolume = null; // Track the currently loading volume
+        var currentImages = []; // Track the images being loaded
+
+        // Function to dynamically generate the chapter options
+        function generateChapterOptions() {
+            var chapterSelect = document.getElementById('chapter-select');
+
+            chapterFolders.forEach(function(folderName, index) {
+                var option = document.createElement('option');
+                option.value = folderName;
+                option.textContent = 'Chapitre ' + folderName;
+                chapterSelect.appendChild(option);
+
+                // Set the first option as selected
+                if (index === 0) {
+                    option.selected = true;
+                    loadVolume(folderName);
+                }
+            });
+        }
+
+        // Call the function to generate chapter options when the page loads
+        generateChapterOptions();
+
+        function loadVolume(folderName) {
+            if (currentVolume !== null) {
+                console.log('Aborting current volume loading.');
+                // Abort the loading of current images
+                for (var i = 0; i < currentImages.length; i++) {
+                    currentImages[i].onload = null;
+                    currentImages[i].onerror = null;
+                }
+            }
+            
+            var mangaContainer = document.getElementById('manga-images');
+            mangaContainer.innerHTML = ''; // Clear any existing images
+            
+            var volumeTitle = folderName.toUpperCase();
+            // document.getElementById('volume-title').textContent = volumeTitle; // Display volume title
+            
+            var numberOfImages = 0;
+            currentImages = []; // Reset the array for new images
+
+            function loadImage(i) {
+                var img = new Image();
+                img.onload = function() {
+                    img.alt = 'Page ' + (i + 1);
+                    mangaContainer.appendChild(img);
+                    numberOfImages++;
+                    loadImage(i + 1); // Continue loading next image
+                };
+                img.onerror = function() {
+                    // Error loading image, stop the process
+                    console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
+                };
+                img.src = folderName + '/image_' + i + '.jpg';
+                currentImages.push(img); // Track the current image
+            }
+
+            currentVolume = folderName; // Update the currently loading volume
+            loadImage(0); // Start loading images
+        }
+    </script>
+</body>
+</html>
