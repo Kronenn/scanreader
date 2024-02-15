@@ -15,7 +15,6 @@
     </div>
 
     <script>
-
         var mangaList = [
             ['ninja-slayer', [
                 '1-4', '5-8', '9-12', '13-17', '18-21', '22-25', '26-29', '31', '32', '33',
@@ -60,10 +59,10 @@
 
         // Function to navigate to the selected manga
         function navigateTo(manga, folders) {
-        localStorage.setItem('data1', manga);
-        localStorage.setItem('folders', JSON.stringify(folders)); // Store the list of folders as a string
-        window.location.href = manga + "/reader.html";
-    }
+            localStorage.setItem('data1', manga);
+            localStorage.setItem('folders', JSON.stringify(folders)); // Store the list of folders as a string
+            window.location.href = 'reader.html'; // Load reader.html dynamically
+        }
     </script>
 </body>
 </html>

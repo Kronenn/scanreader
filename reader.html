@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bonkers Scan</title>
-    <link rel="stylesheet" href="../styles.css"> 
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
     <header>
@@ -23,7 +23,6 @@
     </div>
 
     <script>
-
         // Retrieve manga title and folders data from localStorage
         var mangaTitle = localStorage.getItem('data1').replace('-', ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         var mangaFoldersData = localStorage.getItem('folders');
@@ -87,7 +86,7 @@
                     // Error loading image, stop the process
                     console.log('Total number of images loaded for ' + volumeTitle + ':', numberOfImages);
                 };
-                img.src = folderName + '/image_' + i + '.jpg';
+                img.src = mangaTitle.toLowerCase().replace(' ', '-') + '/' + folderName + '/image_' + i + '.jpg'; // Adjusted path
                 currentImages.push(img); // Track the current image
             }
 
