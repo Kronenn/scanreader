@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Ninja Slayer</h1>
+        <h1 id="manga-title"></h1>
         <nav>
             <select id="chapter-select" onchange="loadVolume(this.value)">
                 <option value="" disabled selected>Sélectionner un chapitre</option>
@@ -18,32 +18,40 @@
 
     <div class="content">
         <div class="manga-page">
-            <!-- <h2 id="volume-title"></h2>  -->
             <div id="manga-images"></div>
         </div>
     </div>
 
     <script>
-        // List of folder names representing chapters
+
+        var mangaTitle = "Ninja Slayer"; // Define the manga title here
         var chapterFolders = [
             '1-4', '5-8', '9-12', '13-17', '18-21', '22-25', '26-29', '30', '31'
             // Add more folder names as needed
         ];
+
+        document.getElementById('manga-title').textContent = mangaTitle;
 
         var currentVolume = null; // Track the currently loading volume
         var currentImages = []; // Track the images being loaded
 
         // Function to dynamically generate the chapter options
         function generateChapterOptions() {
-            var chapterSelect = document.getElementById('chapter-select');
+        var chapterSelect = document.getElementById('chapter-select');
 
-            chapterFolders.forEach(function(folderName) {
-                var option = document.createElement('option');
-                option.value = folderName;
-                option.textContent = 'Chapitre ' + folderName;
-                chapterSelect.appendChild(option);
-            });
-        }
+        chapterFolders.forEach(function(folderName, index) {
+            var option = document.createElement('option');
+            option.value = folderName;
+            option.textContent = 'Chapitre ' + folderName;
+            chapterSelect.appendChild(option);
+
+            // Set the first option as selected
+            if (index === 0) {
+                option.selected = true;
+                loadVolume(folderName);
+            }
+        });
+    }
 
         // Call the function to generate chapter options when the page loads
         generateChapterOptions();
